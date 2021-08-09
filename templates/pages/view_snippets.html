@@ -1,5 +1,11 @@
 {% extends 'base.html' %}
-
+{% block styles %}
+<style>
+    .fa-ban {
+        color: red;
+    }
+</style>
+{% endblock %}
 {% block content %}
 <div class="container">
     <div class="row">
@@ -31,7 +37,11 @@
                 {% for snippet in snippets %}
                 <tr>
                     <td scope="row">{{ snippet.id }}</td>
-                    <td><a href="{% url 'snippet-page' snippet.id %}" >{{ snippet.name }}</a></td>
+                    <td>
+                        <a href="{% url 'snippet-page' snippet.id %}" >{{ snippet.name }}</a>
+                        <a href="{% url 'snippet-delete' snippet.id %}"> <i class="fas fa-ban"></i></a>
+                        <a href="{% url 'snippet-edit' snippet.id %}"> <i class="far fa-edit"></i></a>
+                    </td>
                     <td>{{ snippet.creation_date }}</td>
                 </tr>
                 {% endfor %}

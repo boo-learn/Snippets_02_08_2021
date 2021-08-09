@@ -2,25 +2,36 @@
 
 {% block content %}
 <div class="container">
-    <fieldset disabled>
-        <div class="row disabled">
-            <div class="col col-8">
-                Название: <input type="text" value="{{ snippet.name }}" class="form-control">
-            </div>
-            <div class="col col-4">
-                Дата создания:<input type="text" value="{{ snippet.creation_date }}" class="form-control">
-            </div>
-        </div>
-        <hr>
-        <div class="row">
-            <div class="col">
-                <div class="p-2 h-100" style="border:1px solid #ced4da; border-radius:5px;">
-                    <p>
-                        {{ snippet.code }}
-                    </p>
+    <form method="post" action="{% url 'snippet-edit' snippet.id %}">
+        <fieldset {% if not edit %} disabled {% endif %}>
+            <div class="row disabled">
+                <div class="col col-8">
+                    Название: <input type="text" value="{{ snippet.name }}" class="form-control">
+                </div>
+                <div class="col col-4">
+                    Дата создания:<input type="text" value="{{ snippet.creation_date }}" class="form-control">
                 </div>
             </div>
-        </div>
-    </fieldset>
+            <hr>
+            <div class="row">
+                <div class="col">
+                    <div class="p-2 h-100" style="border:1px solid #ced4da; border-radius:5px;">
+                        {% if not edit %}
+                        <p>
+                            {{ snippet.code }}
+                        </p>
+                        {% else %}
+                        <textarea name="code">
+                        {{ snippet.code }}
+                    </textarea>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+        {% if edit %}
+        <button type="submit">Сохранить</button>
+        {% endif %}
+    </form>
 </div>
 {% endblock %}

@@ -22,6 +22,25 @@ def add_snippet_page(request):
     context = {'pagename': 'Добавление нового сниппета', "form": form}
     return render(request, 'pages/add_snippet.html', context)
 
+
+def delete_snippet_page(request, id):
+    snippet = Snippet.objects.get(pk=id)
+    snippet.delete()
+    return redirect('snippets-list')
+
+
+def edit_snippet_page(request, id):
+    if request.method == "GET":
+        snippet = Snippet.objects.get(pk=id)
+        context = {
+            'pagename': 'Страница сниппета',
+            "snippet": snippet,
+            "edit": True
+        }
+        return render(request, 'pages/snippet_info.html', context)
+    # обрабатываем данные от формы и изменяем Сниппет
+
+
 def snippets_page(request):
     snippets = Snippet.objects.all()
     context = {'pagename': 'Просмотр сниппетов', "snippets": snippets}
@@ -32,6 +51,3 @@ def snippet(request, id):
     snippet = Snippet.objects.get(pk=id)
     context = {'pagename': 'Страница сниппета', "snippet": snippet}
     return render(request, 'pages/snippet_info.html', context)
-
-
-
