@@ -19,7 +19,8 @@ def add_snippet_page(request):
     if form.is_valid():
         form.save()
         return redirect('snippets-list')
-    
+    context = {'pagename': 'Добавление нового сниппета', "form": form}
+    return render(request, 'pages/add_snippet.html', context)
 
 def snippets_page(request):
     snippets = Snippet.objects.all()
