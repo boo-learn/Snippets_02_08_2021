@@ -1,3 +1,4 @@
+from django.contrib import auth
 from django.http import Http404
 from django.shortcuts import render, redirect
 from MainApp.models import Snippet
@@ -51,3 +52,21 @@ def snippet(request, id):
     snippet = Snippet.objects.get(pk=id)
     context = {'pagename': 'Страница сниппета', "snippet": snippet}
     return render(request, 'pages/snippet_info.html', context)
+
+
+def login(request):
+    if request.method == 'POST':
+        username = request.POST.get("username")
+        password = request.POST.get("password")
+        user = auth.authenticate(request, username=username, password=password)
+        if user is not None:
+            auth.login(request, user)
+        else:
+            # Return error message
+            pass
+    return redirect('home')
+
+
+def logout(request):
+    auth.logout(request)
+    return redirect('home')
