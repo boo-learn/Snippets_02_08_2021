@@ -1,8 +1,9 @@
 from django.contrib import auth
+from django.contrib.auth.decorators import login_required
 from django.http import Http404
 from django.shortcuts import render, redirect
 from MainApp.models import Snippet
-from MainApp.forms import SnippetForm
+from MainApp.forms import SnippetForm, UserRegistrationForm
 
 
 def index_page(request):
@@ -17,8 +18,12 @@ def add_snippet_page(request):
         return render(request, 'pages/add_snippet.html', context)
 
     form = SnippetForm(request.POST)
+    # print("user = ", request.user)
     if form.is_valid():
-        form.save()
+        snippet = form.save(commit=False)
+        if request.user.is_authenticated:
+            snippet.user = request.user
+        snippet.save()
         return redirect('snippets-list')
     context = {'pagename': 'Добавление нового сниппета', "form": form}
     return render(request, 'pages/add_snippet.html', context)
@@ -30,9 +35,11 @@ def delete_snippet_page(request, id):
     return redirect('snippets-list')
 
 
+@login_required
 def edit_snippet_page(request, id):
     if request.method == "GET":
         snippet = Snippet.objects.get(pk=id)
+        # if snippet.user == request.user:
         context = {
             'pagename': 'Страница сниппета',
             "snippet": snippet,
@@ -70,3 +77,17 @@ def login(request):
 def logout(request):
     auth.logout(request)
     return redirect('home')
+
+
+def register(request):
+    if request.method == "GET":
+        form = UserRegistrationForm()
+        context = {"form": form}
+        return render(request, 'pages/register_page.html', context)
+
+    form = UserRegistrationForm(request.POST)
+    if form.is_valid():
+        form.save()
+        return redirect('home')
+    context = {"form": form}
+    return render(request, 'pages/register_page.html', context)
