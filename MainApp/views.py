@@ -17,7 +17,7 @@ def add_snippet_page(request):
         context = {'pagename': 'Добавление нового сниппета', "form": form}
         return render(request, 'pages/add_snippet.html', context)
 
-    form = SnippetForm(request.POST)
+    form = SnippetForm(request.POST, request.FILES)
     # print("user = ", request.user)
     if form.is_valid():
         snippet = form.save(commit=False)

@@ -32,5 +32,6 @@ urlpatterns = [
     path('comment/add', views.comment_add, name="comment_add"),
 
     # path('form-data/', views.form_data),
-]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)\
+              +static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

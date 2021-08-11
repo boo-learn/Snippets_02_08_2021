@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
+{% load my_tags %}
 <div class="container">
     <form method="post" action="{% url 'snippet-edit' snippet.id %}">
         <fieldset {% if not edit %} disabled {% endif %}>
@@ -14,16 +15,19 @@
             </div>
             <hr>
             <div class="row">
-                <div class="col">
+                <div class="col-4">
+                        <img src="{{ MEDIA_URL }}{{ snippet.image }}">
+                </div>
+                <div class="col-8">
                     <div class="p-2 h-100" style="border:1px solid #ced4da; border-radius:5px;">
                         {% if not edit %}
                         <p>
-                            {{ snippet.code }}
+                            {{ snippet.code | format_code | safe }}
                         </p>
                         {% else %}
                         <textarea name="code">
                         {{ snippet.code }}
-                    </textarea>
+                        </textarea>
                         {% endif %}
                     </div>
                 </div>

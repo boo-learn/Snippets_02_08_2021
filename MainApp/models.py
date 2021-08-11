@@ -23,3 +23,4 @@ class Snippet(models.Model):
     creation_date = models.DateTimeField(default=datetime.datetime.now)
     user = models.ForeignKey(to=User, on_delete=models.CASCADE,
                              blank=True, null=True)
+    image = models.ImageField(upload_to="images", null=True, blank=True)
