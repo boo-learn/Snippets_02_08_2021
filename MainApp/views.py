@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import Http404
 from django.shortcuts import render, redirect
 from MainApp.models import Snippet
-from MainApp.forms import SnippetForm, UserRegistrationForm
+from MainApp.forms import SnippetForm, UserRegistrationForm, CommentForm
 
 
 def index_page(request):
@@ -57,7 +57,8 @@ def snippets_page(request):
 
 def snippet(request, id):
     snippet = Snippet.objects.get(pk=id)
-    context = {'pagename': 'Страница сниппета', "snippet": snippet}
+    form_comment = CommentForm()
+    context = {'pagename': 'Страница сниппета', "snippet": snippet, "form_comment": form_comment}
     return render(request, 'pages/snippet_info.html', context)
 
 
@@ -91,3 +92,20 @@ def register(request):
         return redirect('home')
     context = {"form": form}
     return render(request, 'pages/register_page.html', context)
+
+
+@login_required
+def comment_add(request):
+    if request.method == "POST":
+        comment_form = CommentForm(request.POST)
+        snippet_id = request.POST["snippet_id"]
+        if comment_form.is_valid():
+            snippet = Snippet.objects.get(id = snippet_id)
+            comment = comment_form.save(commit=False)
+            comment.author = request.user
+            comment.snippet = snippet
+            comment.save()
+
+        return redirect(f'/snippet/{snippet_id}')
+
+    raise Http404

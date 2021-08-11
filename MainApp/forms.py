@@ -1,6 +1,6 @@
 from django.forms import ModelForm, Textarea, TextInput, IntegerField, \
     CharField, ValidationError, PasswordInput
-from MainApp.models import Snippet
+from MainApp.models import Snippet, Comment
 from django.contrib.auth.models import User
 
 
@@ -13,8 +13,9 @@ class SnippetForm(ModelForm):
             "name": "", "lang": ""
         }
         widgets = {
-            'name': TextInput(attrs={"class":"red", "placeholder": "Название"})
+            'name': TextInput(attrs={"class": "red", "placeholder": "Название"})
         }
+
 
 class UserRegistrationForm(ModelForm):
     class Meta:
@@ -25,8 +26,8 @@ class UserRegistrationForm(ModelForm):
     password2 = CharField(label="Password confirm", widget=PasswordInput)
 
     def clean_password2(self):
-        password1 =  self.cleaned_data.get("password1")
-        password2 =  self.cleaned_data.get("password2")
+        password1 = self.cleaned_data.get("password1")
+        password2 = self.cleaned_data.get("password2")
         if password1 and password2 and password1 != password2:
             raise ValidationError("Пароли должны совпадать")
         return password2
@@ -37,3 +38,9 @@ class UserRegistrationForm(ModelForm):
         if commit:
             user.save()
         return user
+
+
+class CommentForm(ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['text', ]
