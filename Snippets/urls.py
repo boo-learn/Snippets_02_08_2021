@@ -16,10 +16,12 @@ Including another URLconf
 from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
+from django.contrib import admin
 
 from MainApp import views
 
 urlpatterns = [
+    path('admin/', admin.site.urls),
     path('', views.index_page, name="home"),
     path('snippets/add', views.add_snippet_page, name="snippets-add"),
     path('snippet/delete/<int:id>', views.delete_snippet_page, name="snippet-delete"),
