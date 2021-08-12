@@ -6,11 +6,14 @@
     <form method="post" action="{% url 'snippet-edit' snippet.id %}">
         <fieldset {% if not edit %} disabled {% endif %}>
             <div class="row disabled">
-                <div class="col col-8">
+                <div class="col col-6">
                     Название: <input type="text" value="{{ snippet.name }}" class="form-control">
                 </div>
                 <div class="col col-4">
                     Дата создания:<input type="text" value="{{ snippet.creation_date }}" class="form-control">
+                </div>
+                <div class="col-2">
+                    Публичный: {{ form.public }}
                 </div>
             </div>
             <hr>

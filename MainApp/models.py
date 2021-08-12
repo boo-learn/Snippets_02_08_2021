@@ -24,6 +24,7 @@ class Snippet(models.Model):
     user = models.ForeignKey(to=User, on_delete=models.CASCADE,
                              blank=True, null=True)
     image = models.ImageField(upload_to="images", null=True, blank=True)
+    public = models.BooleanField(default=True)
 
     def __str__(self):
         return f"Snippet: {self.name}"
