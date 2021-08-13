@@ -1,0 +1,134 @@
+[
+  {
+    "model": "MainApp.snippet",
+    "pk": 1,
+    "fields": {
+      "name": "User2 Snippet",
+      "lang": "py",
+      "code": "python code be here...",
+      "creation_date": "2021-08-13T14:30:33.372Z",
+      "user": 3,
+      "image": "",
+      "public": true
+    }
+  },
+  {
+    "model": "MainApp.snippet",
+    "pk": 2,
+    "fields": {
+      "name": "User1 Snippet-2",
+      "lang": "py",
+      "code": "bla-bla-bla...",
+      "creation_date": "2021-08-13T14:31:07.366Z",
+      "user": 2,
+      "image": "",
+      "public": true
+    }
+  },
+  {
+    "model": "MainApp.snippet",
+    "pk": 3,
+    "fields": {
+      "name": "User1 Snippet-1",
+      "lang": "js",
+      "code": "Js codeeeee",
+      "creation_date": "2021-08-13T14:31:28.908Z",
+      "user": 2,
+      "image": "",
+      "public": true
+    }
+  },
+  {
+    "model": "MainApp.snippet",
+    "pk": 4,
+    "fields": {
+      "name": "Еще один сниппет",
+      "lang": "cpp",
+      "code": "тут код...",
+      "creation_date": "2021-08-13T16:44:15.608Z",
+      "user": 3,
+      "image": "",
+      "public": true
+    }
+  },
+  {
+    "model": "MainApp.snippet",
+    "pk": 5,
+    "fields": {
+      "name": "И еще один",
+      "lang": "js",
+      "code": "js код...",
+      "creation_date": "2021-08-13T16:44:34.055Z",
+      "user": 3,
+      "image": "",
+      "public": true
+    }
+  },
+  {
+    "model": "MainApp.snippet",
+    "pk": 6,
+    "fields": {
+      "name": "И последний-)",
+      "lang": "py",
+      "code": "код!",
+      "creation_date": "2021-08-13T16:45:37.090Z",
+      "user": 2,
+      "image": "",
+      "public": true
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 1,
+    "fields": {
+      "password": "pbkdf2_sha256$216000$kOudK2jZIz90$jRj4GhX9GLqtDr9C+BMZf942hw66uEwshYdE3OCxqM4=",
+      "last_login": null,
+      "is_superuser": true,
+      "username": "admin",
+      "first_name": "",
+      "last_name": "",
+      "email": "",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2021-08-13T14:28:07.356Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 2,
+    "fields": {
+      "password": "pbkdf2_sha256$216000$VNnYmJUfwEKP$id/bE5gRxE+e/+MByZBytdfWS8H4mFDOwYcimgyvXMs=",
+      "last_login": "2021-08-13T16:45:22.821Z",
+      "is_superuser": false,
+      "username": "User-1",
+      "first_name": "",
+      "last_name": "",
+      "email": "user1@mail.ru",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2021-08-13T14:28:39.106Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 3,
+    "fields": {
+      "password": "pbkdf2_sha256$216000$ipTCgQL2zm5D$Ey1vScBvQtxP2v2TwwrzjsGpd1O9WtpF7tYHQO7z2TQ=",
+      "last_login": "2021-08-13T16:43:53.108Z",
+      "is_superuser": false,
+      "username": "User-2",
+      "first_name": "",
+      "last_name": "",
+      "email": "user2@mail.ru",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2021-08-13T14:29:05.981Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  }
+]

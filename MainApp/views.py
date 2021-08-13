@@ -1,7 +1,9 @@
 from django.contrib import auth
+from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.http import Http404, HttpResponseForbidden
 from django.shortcuts import render, redirect
+from django.db.models import Count
 from MainApp.models import Snippet
 from MainApp.forms import SnippetForm, UserRegistrationForm, CommentForm
 
@@ -55,8 +57,27 @@ def edit_snippet_page(request, id):
 
 
 def snippets_page(request):
+    # STATE: 0 NONE 1 UP 2 DOWN
+    fields = {"id": 0, "name": 0, "creation_date": 0}
     snippets = Snippet.objects.all()
-    context = {'pagename': 'Просмотр сниппетов', "snippets": snippets}
+    sort_field = request.GET.get("sort")
+    if sort_field is not None:
+        if "-" in sort_field:
+            fields[sort_field.replace("-", "")] = 2
+        else:
+            fields[sort_field] = 1
+        snippets = snippets.order_by(sort_field)
+    sort_user = request.GET.get("user")
+    if sort_user:
+        snippets = snippets.filter(user__username = sort_user)
+    users = User.objects.all().annotate(count_snippets=Count('snippet'))
+    users = [user for user in users if user.count_snippets > 0]
+    context = {
+        'pagename': 'Просмотр сниппетов',
+        "snippets": snippets,
+        "fields": fields,
+        "users": users
+    }
     return render(request, 'pages/view_snippets.html', context)
 
 
