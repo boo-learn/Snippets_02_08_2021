@@ -4,4 +4,4 @@ ipython
 Pillow==8.3.1
 gunicorn
 django-heroku
-psycopg2-binary
+dj-database-url
